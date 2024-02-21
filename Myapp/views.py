@@ -46,7 +46,7 @@ class ImageRecognitionAPIView(APIView):
             predictions = model.predict(image_array)
 
             # Danh sách các nhãn
-            labels = ['Tulip', 'Sunflower', 'Rose', 'Dandelion', 'Daisy']
+            labels = ['Daisy', 'Dandelion', 'Rose', 'Sunflower', 'Tulip']
 
             # Lấy kết quả
             result = {
