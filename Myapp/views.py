@@ -14,7 +14,7 @@ from django.conf import settings
 class MyModelViewSet(viewsets.ModelViewSet):
     queryset = MyModel.objects.all()
     serializer_class = MyModelSerializer
-    parser_classes = (MultiPartParser, FormParser)  # Thêm cài đặt cho parser
+    parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
         serializer.save(image=self.request.data.get('image'))
@@ -29,7 +29,7 @@ class ImageRecognitionAPIView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             # Lấy đường dẫn đến mô hình nhận diện hình ảnh
-            model_path = os.path.join(settings.BASE_DIR, 'Models/model_flower_kaggle1.h5')
+            model_path = os.path.join(settings.BASE_DIR, 'Train/model-flower14.h5')
 
             # Load mô hình
             model = load_model(model_path)
@@ -46,7 +46,7 @@ class ImageRecognitionAPIView(APIView):
             predictions = model.predict(image_array)
 
             # Danh sách các nhãn
-            labels = ['Daisy', 'Dandelion', 'Rose', 'Sunflower', 'Tulip']
+            labels = ['astilbe', 'bellflower', 'black_eyed_susan', 'calendula', 'california_poppy', 'carnation', 'common_daisy', 'coreopsis', 'dandelion', 'iris', 'rose', 'sunflower', 'tulip', 'water_lily']
 
             # Lấy kết quả
             result = {
