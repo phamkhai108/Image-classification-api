@@ -29,14 +29,14 @@ class ImageRecognitionAPIView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             # Lấy đường dẫn đến mô hình nhận diện hình ảnh
-            model_path = os.path.join(settings.BASE_DIR, 'Train/model-flower14.h5')
+            model_path = os.path.join(settings.BASE_DIR, 'Train/animal_classifier_cnn.h5')
 
             # Load mô hình
             model = load_model(model_path)
 
             # Lấy hình ảnh từ request
             image = Image.open(request.data['image'])
-            image = image.resize((170, 170))
+            image = image.resize((150, 150))
 
             # Chuyển đổi hình ảnh thành mảng numpy và mở rộng thêm một chiều
             image_array = np.array(image) / 255.0
@@ -46,7 +46,7 @@ class ImageRecognitionAPIView(APIView):
             predictions = model.predict(image_array)
 
             # Danh sách các nhãn
-            labels = ['astilbe', 'bellflower', 'black_eyed_susan', 'calendula', 'california_poppy', 'carnation', 'common_daisy', 'coreopsis', 'dandelion', 'iris']
+            labels = ['Cat', 'Dog', 'Elephant', 'Horse', 'Lion']
 
             # Lấy kết quả
             result = {
