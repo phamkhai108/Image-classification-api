@@ -1,12 +1,12 @@
 # Dự án phân loại động vật có vú qua API với 5 loài 'Cat', 'Dog', 'Rose', 'Elephant', 'Horse', 'Lion'
-*chức năng :*
+## chức năng :
 1. Dư đoán và trả về kết quả thông qua API.
    - Đầu vào: các trường, trong đó có trường hình ảnh
    - Đàu ra: kết quả dự đoán, gồm có tên đọngo vật và độ tin cậy mà mô hình dự đoán ra loài động vật đó.
 2. Xem kết quả khi các giá trị đã up lên database
 3. Xóa các đối tượng trong database thông qua id của chúng
 
-*Tổng quan thực hiện project:*
+## Tổng quan thực hiện project:
 1. Thu thập dữ liệu.
 2. Train model phân loại 5 loài động vật với kiến trúc CNN dùng framework 'Tensorflow'. Chi tiết link (data và googlecolab): [Data and googlecolab](https://drive.google.com/drive/folders/1uoUC4oMCYdUQcrb2V5W-CXgbzeKRDh2S?usp=sharing)
 3. Thực hiện xây dựng Api với Django-rest-framework.
