@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Myapp',
     'rest_framework',
+    'Mydisplay'
 ]
 
 MIDDLEWARE = [

@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from PIL import Image
 import numpy as np
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from django.conf import settings
 
 

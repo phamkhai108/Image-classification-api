@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My New App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to My New App!</h1>
+
+    <!-- Form để xem dữ liệu -->
+    <button id="loadData">Load Data</button>
+    <div id="dataContainer"></div>
+
+    <!-- Form để xóa dữ liệu -->
+    <input type="text" id="deleteId" placeholder="Enter ID to delete">
+    <button id="deleteData">Delete Data</button>
+
+    <!-- Form để tải lên và dự đoán hình ảnh -->
+    <form id="predictForm" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageUpload">
+        <button type="submit">Upload and Predict</button>
+    </form>
+
+    <!-- Form để tải lên dữ liệu -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="text" name="name" id="nameInput" placeholder="Enter name">
+        <input type="file" name="image" id="dataUpload">
+        <button type="submit">Upload Data</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#loadData").click(function() {
+                $.ajax({
+                    url: '/api/mymodel/',  // Đường dẫn đến API của bạn
+                    type: 'GET',
+                    success: function(data) {
+                        // Xử lý dữ liệu trả về từ API ở đây
+                        // Ví dụ: hiển thị dữ liệu trong #dataContainer
+                        $("#dataContainer").html(JSON.stringify(data));
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            $("#deleteData").click(function() {
+                var id = $("#deleteId").val();
+                if (id != null) {
+                    $.ajax({
+                        url: '/api/mymodel/delete/' + id + '/',  // Đường dẫn đến API xóa của bạn
+                        type: 'DELETE',
+                        success: function(result) {
+                            alert("Data deleted successfully");
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+
+            $("#predictForm").submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '/api/image-recognition/',  // Đường dẫn đến API dự đoán hình ảnh của bạn
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        // Xử lý kết quả dự đoán trả về từ API ở đây
+                        alert("Predicted class: " + data.class_name + ", Confidence: " + data.confidence);
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+
+            $("#uploadForm").submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '/api/mymodel/',  // Đường dẫn đến API thêm dữ liệu của bạn
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        // Xử lý kết quả trả về từ API ở đây
+                        alert("Data uploaded successfully");
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+        });
+    </script>
+</body>
+</html>
