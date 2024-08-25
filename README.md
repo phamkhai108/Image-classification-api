@@ -32,6 +32,7 @@
    - Chuyển đến đường dẫn project chay câu lệnh 'py manage.py runserver 8100' ('8100' là cổng có thể thay đổi, nếu không có giá trị đó mặc định sẽ chạy trên cổng '8000')
    - khi chạy project chúng ta có các đường dẫn để thử như sau, mọi người có thể dùng postman để thử.
    - Gồm 3 đường dẫn:
+     - Dường dẫn 'http://127.0.0.1:8100/api/image-recognition/' Dùng mô hình dự đoán cho bức ảnh nhận về tên lớp dự đoán và độ tin cậy mà mô hình dự đoán được lớp đó.
      - Đường dẫn 'http://127.0.0.1:8000/api/mymodel/' với phương thức GET sẽ liệt kê các đối tượng có trong Database.
-     - Đường dẫn 'http://127.0.0.1:8000/api/mymodel/' với phương thức POST sẽ đẩy các trường thông tin lên và nhận về là tên mô hình dự đoán cho bức ảnh (name) và độ tin cậy mà mô hình đưa ra cho 'name' (confidence)
+     - Đường dẫn 'http://127.0.0.1:8000/api/mymodel/' với phương thức POST sẽ đẩy các trường thông tin lên.
      - Dể xóa dùng đường dẫn 'http://127.0.0.1:8000/api/mymodel/delete/20/' với phương thức DELETE để xóa đối tượng có id là 20 trong database. Có thể thay đổi giá trị '20' phù hợp với đối tượng cần xóa.
